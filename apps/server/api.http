@@ -1,0 +1,14 @@
+### Get user id
+POST http://localhost:3000/api/user
+
+### Get pokemon list
+GET http://localhost:3000/api/pokemon
+
+### Get pokemon
+GET http://localhost:3000/api/pokemon/1
+
+### Get favorite
+GET http://localhost:3000/api/favorite
+
+### Add favorite
+POST http://localhost:3000/api/favorite
