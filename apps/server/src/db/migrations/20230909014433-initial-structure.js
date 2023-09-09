@@ -82,10 +82,54 @@ module.exports = {
         defaultValue: Sequelize.NOW,
       },
     })
+
+    await queryInterface.createTable('users_pokemons', {
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        field: 'user_id',
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      pokemonId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        field: 'pokemon_id',
+        references: {
+          model: 'pokemons',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        field: 'created_at',
+        defaultValue: Sequelize.NOW,
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        field: 'updated_at',
+        defaultValue: Sequelize.NOW,
+      },
+    })
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('users')
+    await queryInterface.dropTable('users_pokemons')
     await queryInterface.dropTable('pokemons')
+    await queryInterface.dropTable('users')
   },
 }

@@ -6,40 +6,34 @@ import {
   Sequelize,
 } from 'sequelize'
 
-export const PokemonAttributes: ModelAttributes = {
+export const UserPokemonAttributes: ModelAttributes = {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
   },
-  extId: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    unique: true,
-    field: 'ext_id',
+    field: 'user_id',
+    references: {
+      model: 'users',
+      key: 'id',
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
   },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  height: {
+  pokemonId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0,
-  },
-  weight: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    defaultValue: 0,
-  },
-  image: {
-    type: DataTypes.TEXT,
-  },
-  stats: {
-    type: DataTypes.JSON,
-    allowNull: false,
-    defaultValue: [],
+    field: 'pokemon_id',
+    references: {
+      model: 'pokemons',
+      key: 'id',
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
   },
   createdAt: {
     type: DataTypes.DATE,
@@ -55,20 +49,12 @@ export const PokemonAttributes: ModelAttributes = {
   },
 }
 
-export class Pokemon extends Model {
-  static associate(models) {
-    // define association here
-    this.belongsToMany(models.User, {
-      through: models.UserPokemon,
-      foreignKey: 'pokemonId',
-    })
-  }
-
+export class UserPokemon extends Model {
   static config(sequelize: Sequelize): InitOptions {
     return {
       sequelize,
-      tableName: 'pokemons',
-      modelName: 'Pokemon',
+      tableName: 'users_pokemons',
+      modelName: 'UserPokemon',
       timestamps: true,
       createdAt: 'created_at',
       updatedAt: 'updated_at',

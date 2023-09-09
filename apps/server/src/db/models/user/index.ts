@@ -38,8 +38,12 @@ export const UserAttributes: ModelAttributes = {
 }
 
 export class User extends Model {
-  static associate() {
+  static associate(models) {
     // define association here
+    this.belongsToMany(models.Pokemon, {
+      through: models.UserPokemon,
+      foreignKey: 'userId',
+    })
   }
 
   static config(sequelize: Sequelize): InitOptions {
