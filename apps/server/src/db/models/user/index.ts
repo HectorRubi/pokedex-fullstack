@@ -1,4 +1,3 @@
-import crypto from 'crypto'
 import {
   DataTypes,
   InitOptions,
@@ -21,7 +20,8 @@ export const UserAttributes: ModelAttributes = {
   uuid: {
     type: DataTypes.UUID,
     allowNull: false,
-    defaultValue: crypto.randomUUID(),
+    defaultValue: DataTypes.UUIDV4,
+    unique: true,
   },
   createdAt: {
     type: DataTypes.DATE,
