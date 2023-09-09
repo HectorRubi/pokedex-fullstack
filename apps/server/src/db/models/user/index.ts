@@ -9,7 +9,7 @@ import {
 
 export const UserAttributes: ModelAttributes = {
   id: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
