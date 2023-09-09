@@ -1,13 +1,18 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "type": "module",
+  "type": "commonjs",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build:dev": "tsc --watch",
     "dev": "nodemon dist/index.js",
     "build": "tsc",
-    "build:dev": "tsc --watch"
+    "start": "node dist/index.js",
+    "migration:generate": "sequelize-cli migration:generate --name",
+    "migration:run": "sequelize-cli db:migrate",
+    "migration:rollback": "sequelize-cli db:migrate:undo",
+    "migration:delete": "sequelize-cli db:migrate:undo:all"
   },
   "keywords": [],
   "author": "HectorRubi",
@@ -21,10 +26,15 @@
     "eslint-config-prettier": "^9.0.0",
     "nodemon": "^3.0.1",
     "prettier": "3.0.3",
+    "sequelize-cli": "^6.6.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
-    "express": "^4.18.2"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.33.0"
   }
 }

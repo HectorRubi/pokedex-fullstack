@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { Boom } from '@hapi/boom'
+import { ValidationError } from 'sequelize'
 
 export const errorHandler = (
   err: Error,
@@ -15,14 +16,31 @@ export const errorHandler = (
 }
 
 export const boomErrorHandler = (
-  err: Boom,
+  err: Boom | Error,
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  if (err.isBoom) {
+  if (err instanceof Boom) {
     const { output } = err
     res.status(output.statusCode).json(output.payload)
+  } else {
+    next(err)
+  }
+}
+
+export const sequelizeErrorHandler = (
+  err: ValidationError | Boom | Error,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (err instanceof ValidationError) {
+    res.status(409).json({
+      statusCode: 409,
+      message: err.name,
+      errors: err.errors,
+    })
   } else {
     next(err)
   }

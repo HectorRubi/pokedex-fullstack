@@ -1,6 +1,10 @@
 import express, { Request, Response } from 'express'
 import { RouterModule } from './router/index.js'
-import { errorHandler, boomErrorHandler } from './middleware/error.handler.js'
+import {
+  errorHandler,
+  boomErrorHandler,
+  sequelizeErrorHandler,
+} from './middleware/error.handler.js'
 
 const app = express()
 
@@ -10,6 +14,7 @@ app.get('/', (req: Request, res: Response) => {
 
 RouterModule.init(app)
 
+app.use(sequelizeErrorHandler)
 app.use(boomErrorHandler)
 app.use(errorHandler)
 
