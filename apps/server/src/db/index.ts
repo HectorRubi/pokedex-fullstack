@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize'
-import { Models } from './models/index.js'
+import { Models } from './models'
 
-import { config } from './../config/index.js'
+import { config } from './../config'
 
 const sequelize = new Sequelize(`${config.dbURI}`, {})
 Models.setup(sequelize)

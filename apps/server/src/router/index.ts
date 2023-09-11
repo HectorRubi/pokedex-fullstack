@@ -1,7 +1,7 @@
 import { Express, Router } from 'express'
-import { userRouter } from './user/index.js'
-import { favoriteRouter } from './favorite/index.js'
-import { pokemonRouter } from './pokemon/index.js'
+import { userRouter } from './user'
+import { favoriteRouter } from './favorite'
+import { pokemonRouter } from './pokemon'
 
 export class RouterModule {
   static init(app: Express) {

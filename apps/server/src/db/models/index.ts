@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize'
-import { User, UserAttributes } from './user/index.js'
-import { Pokemon, PokemonAttributes } from './pokemon/index.js'
-import { UserPokemon, UserPokemonAttributes } from './user-pokemon/index.js'
+import { User, UserAttributes } from './user'
+import { Pokemon, PokemonAttributes } from './pokemon'
+import { UserPokemon, UserPokemonAttributes } from './user-pokemon'
 
 export class Models {
   static setup(sequelize: Sequelize) {
