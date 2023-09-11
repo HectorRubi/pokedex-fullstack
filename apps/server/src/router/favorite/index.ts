@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response, Router } from 'express'
+import { FavoriteService } from './../../services/favorite.service'
+import { validateSchema } from './../../middleware/validator.handler'
+import { createFavorite } from './validation.schema'
 
 const favoriteRouter = Router()
+const favoriteService = new FavoriteService()
 
 favoriteRouter
   .route('/')
@@ -15,9 +19,9 @@ favoriteRouter
   })
   .post(async (req: Request, res: Response, next: NextFunction) => {
     try {
-      res.send({
-        route: 'POST /favorite',
-      })
+      const data = validateSchema(createFavorite, req.body)
+      await favoriteService.add(data.user, data.pokemon)
+      res.status(201).json()
     } catch (error) {
       next(error)
     }
