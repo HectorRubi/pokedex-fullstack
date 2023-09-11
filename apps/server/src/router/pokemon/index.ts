@@ -1,14 +1,20 @@
 import { NextFunction, Request, Response, Router } from 'express'
+import { PokemonService } from './../../services/pokemon.service'
+import { validateSchema } from './../../middleware/validator.handler'
+import { getPokemonListValidator } from './validation.schema'
 
 const pokemonRouter = Router()
+const pokemonService = new PokemonService()
 
 pokemonRouter
   .route('/')
   .get(async (req: Request, res: Response, next: NextFunction) => {
     try {
-      res.send({
-        route: 'GET /pokemon',
-      })
+      const data = validateSchema(getPokemonListValidator, req.query)
+      const offset = data.offset || 0
+      const limit = data.limit || 10
+      const pokemonList = await pokemonService.findAll(offset, limit)
+      res.send(pokemonList)
     } catch (error) {
       next(error)
     }
