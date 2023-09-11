@@ -73,4 +73,14 @@ export class PokemonService {
 
     return pokemonList
   }
+
+  async findById(id: number) {
+    const pokemon = PokemonModel.findOne({
+      attributes: pokemonAttributes,
+      where: {
+        id,
+      },
+    })
+    return pokemon
+  }
 }

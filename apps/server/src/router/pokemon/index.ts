@@ -1,7 +1,10 @@
 import { NextFunction, Request, Response, Router } from 'express'
 import { PokemonService } from './../../services/pokemon.service'
 import { validateSchema } from './../../middleware/validator.handler'
-import { getPokemonListValidator } from './validation.schema'
+import {
+  getPokemonListValidator,
+  getPokemonIdValidator,
+} from './validation.schema'
 
 const pokemonRouter = Router()
 const pokemonService = new PokemonService()
@@ -24,9 +27,10 @@ pokemonRouter
   .route('/:id')
   .get(async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { id } = req.params
+      const { id } = validateSchema(getPokemonIdValidator, req.params)
+      const pokemon = await pokemonService.findById(id)
       res.send({
-        route: `GET /pokemon/${id}`,
+        pokemon,
       })
     } catch (error) {
       next(error)
