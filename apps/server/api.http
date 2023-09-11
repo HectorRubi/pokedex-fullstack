@@ -1,14 +1,25 @@
 ### Get user id
 POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "name": "user"
+}
 
 ### Get pokemon list
-GET http://localhost:3000/api/pokemon
+GET http://localhost:3000/api/pokemon?offset=37&limit=10
 
 ### Get pokemon
 GET http://localhost:3000/api/pokemon/1
 
 ### Get favorite
-GET http://localhost:3000/api/favorite
+GET http://localhost:3000/api/favorite?user=e203a531-e818-4bb1-9b89-b9e856299123
 
 ### Add favorite
 POST http://localhost:3000/api/favorite
+Content-Type: application/json
+
+{
+  "user": "e203a531-e818-4bb1-9b89-b9e856299123",
+  "pokemon": 1
+}
