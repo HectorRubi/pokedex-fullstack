@@ -3,4 +3,5 @@ dotenv.config()
 
 export const config = {
   dbURI: process.env.DB_URI,
+  pokeapi: process.env.POKEAPI,
 }
