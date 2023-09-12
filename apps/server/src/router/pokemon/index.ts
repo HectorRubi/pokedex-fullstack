@@ -17,7 +17,7 @@ pokemonRouter
       const offset = data.offset || 0
       const limit = data.limit || 10
       const pokemonList = await pokemonService.findAll(offset, limit)
-      res.send(pokemonList)
+      res.json(pokemonList)
     } catch (error) {
       next(error)
     }
@@ -29,9 +29,7 @@ pokemonRouter
     try {
       const { id } = validateSchema(getPokemonIdValidator, req.params)
       const pokemon = await pokemonService.findById(id)
-      res.send({
-        pokemon,
-      })
+      res.json(pokemon)
     } catch (error) {
       next(error)
     }

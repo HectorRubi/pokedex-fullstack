@@ -12,7 +12,7 @@ favoriteRouter
     try {
       const { user: userId } = validateSchema(getFavorite, req.query)
       const favorites = await favoriteService.get(userId)
-      res.send(favorites['Pokemons'])
+      res.json(favorites['Pokemons'])
     } catch (error) {
       next(error)
     }

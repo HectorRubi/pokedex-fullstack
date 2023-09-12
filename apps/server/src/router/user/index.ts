@@ -12,7 +12,7 @@ userRouter
     try {
       const { name } = validateSchema(createUserValidator, req.body)
       const user = await userService.create(name)
-      res.send({
+      res.json({
         id: user.dataValues.uuid,
         name: user.dataValues.name,
       })
