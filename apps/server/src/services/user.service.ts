@@ -1,7 +1,11 @@
 import { sequelize } from './../db'
 
+const {
+  models: { User: UserModel },
+} = sequelize
+
 export class UserService {
   async create(data) {
-    return await sequelize.models.User.create({ name: data.name })
+    return await UserModel.create({ name: data.name })
   }
 }
