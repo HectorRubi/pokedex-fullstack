@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Card, Button, Pagination, Spinner } from 'flowbite-react'
-import { HiStar } from 'react-icons/hi'
+import { Pagination, Spinner } from 'flowbite-react'
+import { PokemonCard } from './../Card'
 import { useFetchPokemons } from './../../../hooks/useFetchPokemons'
 
 export function PokemonList() {
@@ -23,22 +23,7 @@ export function PokemonList() {
         <div>
           <div className="grid grid-cols-4 gap-5 mb-10">
             {allPokemons.map((pokemon, index) => (
-              <Card
-                key={index}
-                renderImage={() => (
-                  <img width={475} height={475} src={pokemon.image} />
-                )}
-              >
-                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-                  {pokemon.name}
-                </h5>
-                <div className="flex justify-between">
-                  <Button>View</Button>
-                  <Button color="warning">
-                    <HiStar />
-                  </Button>
-                </div>
-              </Card>
+              <PokemonCard pokemon={pokemon} key={index} />
             ))}
           </div>
           <div className="flex justify-center">
