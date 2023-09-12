@@ -4,6 +4,7 @@ import { Flowbite } from 'flowbite-react'
 import { Navbar } from './../Navbar'
 import { Footer } from './../Footer'
 import { User } from './../User'
+import { PokemonLayout } from './../Pokemon/Layout'
 import { Error } from './../Error'
 
 import { useError } from './../../hooks/useError'
@@ -27,9 +28,9 @@ export function Layout() {
         </nav>
       </header>
       <main className="bg-slate-100 dark:bg-[#111827]">
-        <section className="max-w-5xl mx-auto px-2 lg:px-0 py-36 min-h-[68vh]">
+        <section className="max-w-5xl mx-auto px-2 lg:px-0 min-h-[68vh]">
           {isUser ? (
-            <span>Pokemon</span>
+            <PokemonLayout />
           ) : (
             <User
               setIsUser={setIsUser}
