@@ -5,8 +5,12 @@ import { USER } from './../../utils/constants'
 
 export function User({
   setIsUser,
+  setShowError,
+  setErrorMessage,
 }: {
   setIsUser: React.Dispatch<React.SetStateAction<boolean>>
+  setShowError: React.Dispatch<React.SetStateAction<boolean>>
+  setErrorMessage: React.Dispatch<React.SetStateAction<string>>
 }) {
   const [showLoader, setShowLoader] = useState(false)
   const name = useRef('')
@@ -19,7 +23,9 @@ export function User({
     setShowLoader(true)
 
     if (name.current.length === 0) {
-      // Show an error
+      setErrorMessage('Name field should not be empty')
+      setShowError(true)
+      setShowLoader(false)
       return
     }
 
@@ -27,11 +33,11 @@ export function User({
       .then((response) => {
         localStorage.setItem(USER, response.id)
         setIsUser(true)
-        // Show pokemon view
       })
       .catch((error) => {
         console.log({ error })
-        // Show error
+        setErrorMessage('Something wrong happen, please try again later.')
+        setShowError(true)
       })
       .finally(() => {
         setShowLoader(false)

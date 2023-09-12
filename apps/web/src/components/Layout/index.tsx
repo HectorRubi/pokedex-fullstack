@@ -4,11 +4,15 @@ import { Flowbite } from 'flowbite-react'
 import { Navbar } from './../Navbar'
 import { Footer } from './../Footer'
 import { User } from './../User'
+import { Error } from './../Error'
+
+import { useError } from './../../hooks/useError'
 
 import { USER } from './../../utils/constants'
 
 export function Layout() {
   const [isUser, setIsUser] = useState(false)
+  const { showError, setShowError, errorMessage, setErrorMessage } = useError()
 
   useEffect(() => {
     const user = localStorage.getItem(USER)
@@ -23,12 +27,21 @@ export function Layout() {
         </nav>
       </header>
       <main className="bg-slate-100 dark:bg-[#111827]">
-        <section className="max-w-5xl mx-auto px-2 lg:px-0 py-36">
-          {isUser ? <span>Pokemon</span> : <User setIsUser={setIsUser} />}
+        <section className="max-w-5xl mx-auto px-2 lg:px-0 py-36 min-h-[68vh]">
+          {isUser ? (
+            <span>Pokemon</span>
+          ) : (
+            <User
+              setIsUser={setIsUser}
+              setShowError={setShowError}
+              setErrorMessage={setErrorMessage}
+            />
+          )}
         </section>
         <footer className="max-w-5xl mx-auto mt-20 py-8 px-2 lg:px-0">
           <Footer />
         </footer>
+        {showError && <Error message={errorMessage} />}
       </main>
     </Flowbite>
   )
