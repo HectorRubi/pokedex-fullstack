@@ -3,7 +3,11 @@ import { Label, TextInput, Button } from 'flowbite-react'
 import { createUser } from './../../api/user'
 import { USER } from './../../utils/constants'
 
-export function User() {
+export function User({
+  setIsUser,
+}: {
+  setIsUser: React.Dispatch<React.SetStateAction<boolean>>
+}) {
   const [showLoader, setShowLoader] = useState(false)
   const name = useRef('')
 
@@ -22,6 +26,7 @@ export function User() {
     createUser(name.current)
       .then((response) => {
         localStorage.setItem(USER, response.id)
+        setIsUser(true)
         // Show pokemon view
       })
       .catch((error) => {

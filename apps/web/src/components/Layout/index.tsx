@@ -24,7 +24,7 @@ export function Layout() {
       </header>
       <main className="bg-slate-100 dark:bg-[#111827]">
         <section className="max-w-5xl mx-auto px-2 lg:px-0 py-36">
-          {isUser ? <span>Pokemon</span> : <User />}
+          {isUser ? <span>Pokemon</span> : <User setIsUser={setIsUser} />}
         </section>
         <footer className="max-w-5xl mx-auto mt-20 py-8 px-2 lg:px-0">
           <Footer />
