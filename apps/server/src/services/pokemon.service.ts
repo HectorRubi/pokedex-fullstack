@@ -1,4 +1,5 @@
 import { Op } from 'sequelize'
+import { notFound } from '@hapi/boom'
 import { Pokeapi } from './../pokeapi'
 import { Pokemon as PokemonModel } from './../db'
 import {
@@ -69,12 +70,17 @@ export class PokemonService {
   }
 
   async findById(id: number) {
-    const pokemon = PokemonModel.findOne({
+    const pokemon = await PokemonModel.findOne({
       attributes: pokemonAttributes,
       where: {
         id,
       },
     })
+
+    if (!pokemon) {
+      throw notFound()
+    }
+
     return pokemon
   }
 }
