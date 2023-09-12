@@ -21,5 +21,8 @@ Content-Type: application/json
 
 {
   "user": "e203a531-e818-4bb1-9b89-b9e856299123",
-  "pokemon": 1
+  "pokemon": 2
 }
+
+### Remove favorite
+DELETE http://localhost:3000/api/favorite/2?user=e203a531-e818-4bb1-9b89-b9e856299123
