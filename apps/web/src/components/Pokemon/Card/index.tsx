@@ -11,7 +11,14 @@ export function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
   return (
     <>
       <Card
-        renderImage={() => <img width={475} height={475} src={pokemon.image} />}
+        renderImage={() => (
+          <img
+            width={475}
+            height={475}
+            src={pokemon.image}
+            className="block mx-auto"
+          />
+        )}
       >
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
           {capitalize(pokemon.name)}

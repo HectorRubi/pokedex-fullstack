@@ -20,34 +20,39 @@ export function PokemonInfo({
     >
       <Modal.Header>{capitalize(pokemon.name)}</Modal.Header>
       <Modal.Body>
-        <div className="grid grid-cols-2 grid-rows-2 gap-5">
-          <div className="row-span-2">
-            <img width={475} height={475} src={pokemon.image} />
-          </div>
+        <div>
+          <img
+            width={475}
+            height={475}
+            src={pokemon.image}
+            className="mx-auto"
+          />
 
-          <div>
-            {stats.map((stat, index) => (
-              <div key={index}>
-                <h4 className="text-black dark:text-white text-lg">
-                  {stat.stat.name}
-                </h4>
-                <Progress progress={stat.base_stat} size="lg" labelProgress />
-              </div>
-            ))}
-          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="rounded bg-sky-400 dark:bg-sky-600 p-5">
+              <h3 className="text-black dark:text-white text-2xl">
+                General Info
+              </h3>
+              <p className="text-black dark:text-white">
+                <span className="font-bold">Height:</span>&nbsp;
+                <span className="text-xl">{pokemon.height}'</span>
+              </p>
+              <p className="text-black dark:text-white">
+                <span className="font-bold">Weight:</span>&nbsp;
+                <span className="text-xl">{pokemon.weight} lbs</span>
+              </p>
+            </div>
 
-          <div className="rounded bg-sky-400 dark:bg-sky-600 p-5">
-            <h3 className="text-black dark:text-white text-2xl">
-              General Info
-            </h3>
-            <p className="text-black dark:text-white">
-              <span className="font-bold">Height:</span>&nbsp;
-              <span className="text-xl">{pokemon.height}'</span>
-            </p>
-            <p className="text-black dark:text-white">
-              <span className="font-bold">Weight:</span>&nbsp;
-              <span className="text-xl">{pokemon.weight} lbs</span>
-            </p>
+            <div>
+              {stats.map((stat, index) => (
+                <div key={index}>
+                  <h4 className="text-black dark:text-white text-lg">
+                    {stat.stat.name}
+                  </h4>
+                  <Progress progress={stat.base_stat} size="lg" labelProgress />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </Modal.Body>
