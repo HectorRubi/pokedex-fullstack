@@ -1,11 +1,7 @@
-import { sequelize } from './../db'
-
-const {
-  models: { User: UserModel },
-} = sequelize
+import { User as UserModel } from './../db'
 
 export class UserService {
-  async create(data) {
-    return await UserModel.create({ name: data.name })
+  async create(name: string) {
+    return await UserModel.create({ name })
   }
 }

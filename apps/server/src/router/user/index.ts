@@ -10,8 +10,8 @@ userRouter
   .route('/')
   .post(async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const data = validateSchema(createUserValidator, req.body)
-      const user = await userService.create(data)
+      const { name } = validateSchema(createUserValidator, req.body)
+      const user = await userService.create(name)
       res.send({
         id: user.dataValues.uuid,
         name: user.dataValues.name,

@@ -1,10 +1,14 @@
 import {
   DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
   InitOptions,
   Model,
   ModelAttributes,
   Sequelize,
+  HasManyAddAssociationMixin,
 } from 'sequelize'
+import { Pokemon } from './../pokemon'
 
 export const UserAttributes: ModelAttributes = {
   id: {
@@ -37,7 +41,18 @@ export const UserAttributes: ModelAttributes = {
   },
 }
 
-export class User extends Model {
+export class User extends Model<
+  InferAttributes<User>,
+  InferCreationAttributes<User>
+> {
+  declare id: number
+  declare name: string
+  declare uuid: string
+  declare createdAt: Date
+  declare updatedAt: Date
+
+  declare addPokemon: HasManyAddAssociationMixin<Pokemon, number>
+
   static associate(models) {
     // define association here
     this.belongsToMany(models.Pokemon, {

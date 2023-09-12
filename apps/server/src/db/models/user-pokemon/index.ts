@@ -1,5 +1,7 @@
 import {
   DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
   InitOptions,
   Model,
   ModelAttributes,
@@ -49,7 +51,16 @@ export const UserPokemonAttributes: ModelAttributes = {
   },
 }
 
-export class UserPokemon extends Model {
+export class UserPokemon extends Model<
+  InferAttributes<UserPokemon>,
+  InferCreationAttributes<UserPokemon>
+> {
+  declare id: number
+  declare userId: number
+  declare pokemonId: number
+  declare createdAt: Date
+  declare updatedAt: Date
+
   static config(sequelize: Sequelize): InitOptions {
     return {
       sequelize,

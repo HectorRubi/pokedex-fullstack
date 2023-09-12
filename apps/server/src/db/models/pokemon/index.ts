@@ -1,5 +1,7 @@
 import {
   DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
   InitOptions,
   Model,
   ModelAttributes,
@@ -55,7 +57,20 @@ export const PokemonAttributes: ModelAttributes = {
   },
 }
 
-export class Pokemon extends Model {
+export class Pokemon extends Model<
+  InferAttributes<Pokemon>,
+  InferCreationAttributes<Pokemon>
+> {
+  declare id: number
+  declare extId: number
+  declare name: string
+  declare height: number
+  declare weight: number
+  declare image: string | null
+  declare stats: string
+  declare createdAt: Date
+  declare updatedAt: Date
+
   static associate(models) {
     // define association here
     this.belongsToMany(models.User, {

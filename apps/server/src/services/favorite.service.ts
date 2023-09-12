@@ -1,13 +1,9 @@
 import { notFound } from '@hapi/boom'
-import { sequelize } from './../db'
-
-const {
-  models: {
-    User: UserModel,
-    Pokemon: PokemonModel,
-    UserPokemon: UserPokemonModel,
-  },
-} = sequelize
+import {
+  User as UserModel,
+  Pokemon as PokemonModel,
+  UserPokemon as UserPokemonModel,
+} from './../db'
 
 export class FavoriteService {
   async get(userId: string) {

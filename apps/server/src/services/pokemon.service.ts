@@ -1,14 +1,10 @@
 import { Op } from 'sequelize'
 import { Pokeapi } from './../pokeapi'
-import { sequelize } from './../db'
+import { Pokemon as PokemonModel } from './../db'
 import {
   PokemonList as PokemonListType,
   Pokemon as PokemonType,
 } from './../types/pokemon.type'
-
-const {
-  models: { Pokemon: PokemonModel },
-} = sequelize
 
 const pokemonAttributes = [
   'id',
