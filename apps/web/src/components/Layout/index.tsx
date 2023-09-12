@@ -28,6 +28,14 @@ export function Layout() {
         </nav>
       </header>
       <main className="bg-slate-100 dark:bg-[#111827]">
+        <section className="max-w-5xl mx-auto mb-20">
+          <img
+            className="block mx-auto"
+            width="500"
+            src="https://raw.githubusercontent.com/HectorRubi/app-test-express-react/master/app/public/logo.png"
+            alt="logo"
+          />
+        </section>
         <section className="max-w-5xl mx-auto px-2 lg:px-0 min-h-[68vh]">
           {isUser ? (
             <PokemonLayout />
