@@ -15,8 +15,7 @@ export function useFetchPokemons(currentPage: number) {
       .then((response) => {
         setAllPokemons(response)
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(() => {
         // Show Error
       })
       .finally(() => {

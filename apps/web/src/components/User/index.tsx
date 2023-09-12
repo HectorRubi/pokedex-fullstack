@@ -34,8 +34,7 @@ export function User({
         localStorage.setItem(USER, response.id)
         setIsUser(true)
       })
-      .catch((error) => {
-        console.log({ error })
+      .catch(() => {
         setErrorMessage('Something wrong happen, please try again later.')
         setShowError(true)
       })

@@ -5,7 +5,6 @@ export function useError() {
   const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
-    console.log({ showError, errorMessage })
     setTimeout(() => {
       setShowError(false)
       setErrorMessage('')
