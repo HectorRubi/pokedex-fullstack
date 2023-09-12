@@ -16,7 +16,7 @@ export class FavoriteService {
           attributes: [],
         },
         attributes: {
-          exclude: ['createdAt', 'updatedAt', 'created_at', 'updated_at'],
+          exclude: ['createdAt', 'updatedAt'],
         },
       },
     })

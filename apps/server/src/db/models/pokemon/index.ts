@@ -84,9 +84,6 @@ export class Pokemon extends Model<
       sequelize,
       tableName: 'pokemons',
       modelName: 'Pokemon',
-      timestamps: true,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
     }
   }
 }

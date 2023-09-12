@@ -55,8 +55,6 @@ export class PokemonService {
         })
 
         if (created) {
-          delete result.dataValues.updated_at
-          delete result.dataValues.created_at
           delete result.dataValues.updatedAt
           delete result.dataValues.createdAt
         }

@@ -66,9 +66,6 @@ export class User extends Model<
       sequelize,
       tableName: 'users',
       modelName: 'User',
-      timestamps: true,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
     }
   }
 }
