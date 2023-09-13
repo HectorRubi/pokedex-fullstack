@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { HiStar } from 'react-icons/hi'
-import { Card, Button } from 'flowbite-react'
+import { HiStar, HiEye } from 'react-icons/hi'
+import { Card, Button, Tooltip } from 'flowbite-react'
 import { PokemonInfo } from './../Info'
 import { capitalize } from './../../../utils/capitalize'
 import { Pokemon } from './../../../types/pokemon.api'
@@ -24,10 +24,17 @@ export function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
           {capitalize(pokemon.name)}
         </h5>
         <div className="flex justify-between">
-          <Button onClick={() => setOpenModal('default')}>View</Button>
-          <Button color="warning">
-            <HiStar />
-          </Button>
+          <Tooltip content="View info">
+            <Button onClick={() => setOpenModal('default')}>
+              <HiEye />
+            </Button>
+          </Tooltip>
+
+          <Tooltip content="Add to Favorites">
+            <Button color="warning">
+              <HiStar />
+            </Button>
+          </Tooltip>
         </div>
       </Card>
 
