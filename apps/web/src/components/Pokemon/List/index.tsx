@@ -3,7 +3,11 @@ import { Pagination, Spinner } from 'flowbite-react'
 import { PokemonCard } from './../Card'
 import { useFetchPokemons } from './../../../hooks/useFetchPokemons'
 
-export function PokemonList() {
+export function PokemonList({
+  setRenderFavorites,
+}: {
+  setRenderFavorites: React.Dispatch<React.SetStateAction<symbol>>
+}) {
   const [currentPage, setCurrentPage] = useState(1)
   const { allPokemons, showLoader, limit, offset } =
     useFetchPokemons(currentPage)
@@ -23,7 +27,11 @@ export function PokemonList() {
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-10">
             {allPokemons.map((pokemon, index) => (
-              <PokemonCard pokemon={pokemon} key={index} />
+              <PokemonCard
+                pokemon={pokemon}
+                key={index}
+                setRenderFavorites={setRenderFavorites}
+              />
             ))}
           </div>
           <div className="flex justify-center">

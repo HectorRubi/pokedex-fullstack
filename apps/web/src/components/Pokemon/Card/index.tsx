@@ -1,12 +1,50 @@
 import { useState } from 'react'
-import { HiStar, HiEye } from 'react-icons/hi'
+import { HiStar, HiEye, HiTrash } from 'react-icons/hi'
 import { Card, Button, Tooltip } from 'flowbite-react'
 import { PokemonInfo } from './../Info'
 import { capitalize } from './../../../utils/capitalize'
 import { Pokemon } from './../../../types/pokemon.api'
+import { addFavorite, removeFavorite } from '../../../api/favorite'
+import { USER } from '../../../utils/constants'
 
-export function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
+export function PokemonCard({
+  pokemon,
+  isFavorite = false,
+  setRenderFavorites,
+}: {
+  pokemon: Pokemon
+  isFavorite?: boolean
+  setRenderFavorites: React.Dispatch<React.SetStateAction<symbol>>
+}) {
   const [openModal, setOpenModal] = useState<string | undefined>()
+
+  const onAddFavorite = (id: number) => {
+    const user = localStorage.getItem(USER)
+    if (user) {
+      addFavorite(user, id)
+        .then(() => {
+          setRenderFavorites(Symbol())
+        })
+        .catch((error) => {
+          console.log(error)
+          // Show error
+        })
+    }
+  }
+
+  const onDeleteFavorite = (id: number) => {
+    const user = localStorage.getItem(USER)
+    if (user) {
+      removeFavorite(user, id)
+        .then(() => {
+          setRenderFavorites(Symbol())
+        })
+        .catch((error) => {
+          console.log(error)
+          // Show error
+        })
+    }
+  }
 
   return (
     <>
@@ -30,11 +68,22 @@ export function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
             </Button>
           </Tooltip>
 
-          <Tooltip content="Add to Favorites">
-            <Button color="warning">
-              <HiStar />
-            </Button>
-          </Tooltip>
+          {isFavorite ? (
+            <Tooltip content="Delete from Favorites">
+              <Button
+                color="failure"
+                onClick={() => onDeleteFavorite(pokemon.id)}
+              >
+                <HiTrash />
+              </Button>
+            </Tooltip>
+          ) : (
+            <Tooltip content="Add to Favorites">
+              <Button color="warning" onClick={() => onAddFavorite(pokemon.id)}>
+                <HiStar />
+              </Button>
+            </Tooltip>
+          )}
         </div>
       </Card>
 
