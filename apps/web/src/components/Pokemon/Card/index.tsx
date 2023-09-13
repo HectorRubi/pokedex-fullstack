@@ -73,6 +73,7 @@ export function PokemonCard({
   return (
     <>
       <Card
+        href="#"
         renderImage={() => (
           <img
             width={475}
