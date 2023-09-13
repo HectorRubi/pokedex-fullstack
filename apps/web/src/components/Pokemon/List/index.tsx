@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Pagination, Spinner } from 'flowbite-react'
 import { PokemonCard } from './../Card'
+import { EmptyCard } from '../EmptyCard'
 import { useFetchPokemons } from './../../../hooks/useFetchPokemons'
 
 export function PokemonList({
@@ -30,6 +31,7 @@ export function PokemonList({
       ) : (
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-10">
+            {allPokemons.length === 0 && <EmptyCard />}
             {allPokemons.map((pokemon, index) => (
               <PokemonCard
                 pokemon={pokemon}

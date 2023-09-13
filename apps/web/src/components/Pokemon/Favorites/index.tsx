@@ -1,5 +1,6 @@
 import { Spinner } from 'flowbite-react'
 import { PokemonCard } from '../Card'
+import { EmptyCard } from '../EmptyCard'
 import { useFetchFavorites } from '../../../hooks/useFetchFavorites'
 
 export function Favorites({
@@ -24,7 +25,7 @@ export function Favorites({
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-10">
-          {favorites.length === 0 && <p>There's no items here</p>}
+          {favorites.length === 0 && <EmptyCard />}
           {favorites.map((pokemon, index) => (
             <PokemonCard
               pokemon={pokemon}
