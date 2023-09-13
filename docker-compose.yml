@@ -1,0 +1,43 @@
+services:
+  app:
+    restart: always
+    build: ./apps/web
+    image: pokedex_app
+    ports:
+      - 8080:80
+    depends_on:
+      - server
+    networks:
+      - pokedex
+
+  server:
+    image: pokedex_server
+    build: ./apps/server
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    networks:
+      - pokedex
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=pokemon
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin123
+    ports:
+      - 5432:5432
+    volumes:
+      - data:/var/lib/postgresql/data
+    networks:
+      - pokedex
+
+volumes:
+  data:
+
+networks:
+  pokedex:
+    driver: bridge
