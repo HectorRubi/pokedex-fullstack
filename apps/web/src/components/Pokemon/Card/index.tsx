@@ -11,10 +11,12 @@ export function PokemonCard({
   pokemon,
   isFavorite = false,
   setRenderFavorites,
+  setErrorMessage,
 }: {
   pokemon: Pokemon
   isFavorite?: boolean
   setRenderFavorites: React.Dispatch<React.SetStateAction<symbol>>
+  setErrorMessage: React.Dispatch<React.SetStateAction<string | null>>
 }) {
   const [openModal, setOpenModal] = useState<string | undefined>()
 
@@ -27,7 +29,9 @@ export function PokemonCard({
         })
         .catch((error) => {
           console.log(error)
-          // Show error
+          setErrorMessage(
+            'Something wrong happen adding favorite, please try again later.',
+          )
         })
     }
   }
@@ -41,7 +45,9 @@ export function PokemonCard({
         })
         .catch((error) => {
           console.log(error)
-          // Show error
+          setErrorMessage(
+            'Something wrong happen removing favorite, please try again later.',
+          )
         })
     }
   }

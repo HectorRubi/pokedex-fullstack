@@ -1,19 +1,15 @@
 import { useEffect, useState } from 'react'
 
 export function useError() {
-  const [showError, setShowError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   useEffect(() => {
     setTimeout(() => {
-      setShowError(false)
-      setErrorMessage('')
+      setErrorMessage(null)
     }, 5000)
-  }, [errorMessage, showError])
+  }, [errorMessage])
 
   return {
-    setShowError,
-    showError,
     setErrorMessage,
     errorMessage,
   }

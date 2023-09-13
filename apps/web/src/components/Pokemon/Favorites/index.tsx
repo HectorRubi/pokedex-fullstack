@@ -5,11 +5,16 @@ import { useFetchFavorites } from '../../../hooks/useFetchFavorites'
 export function Favorites({
   renderFavorites,
   setRenderFavorites,
+  setErrorMessage,
 }: {
   renderFavorites: symbol
   setRenderFavorites: React.Dispatch<React.SetStateAction<symbol>>
+  setErrorMessage: React.Dispatch<React.SetStateAction<string | null>>
 }) {
-  const { favorites, showLoader } = useFetchFavorites(renderFavorites)
+  const { favorites, showLoader } = useFetchFavorites(
+    renderFavorites,
+    setErrorMessage,
+  )
 
   return (
     <>
@@ -26,6 +31,7 @@ export function Favorites({
               key={index}
               isFavorite
               setRenderFavorites={setRenderFavorites}
+              setErrorMessage={setErrorMessage}
             />
           ))}
         </div>

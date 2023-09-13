@@ -5,12 +5,16 @@ import { useFetchPokemons } from './../../../hooks/useFetchPokemons'
 
 export function PokemonList({
   setRenderFavorites,
+  setErrorMessage,
 }: {
   setRenderFavorites: React.Dispatch<React.SetStateAction<symbol>>
+  setErrorMessage: React.Dispatch<React.SetStateAction<string | null>>
 }) {
   const [currentPage, setCurrentPage] = useState(1)
-  const { allPokemons, showLoader, limit, offset } =
-    useFetchPokemons(currentPage)
+  const { allPokemons, showLoader, limit, offset } = useFetchPokemons(
+    currentPage,
+    setErrorMessage,
+  )
 
   const onPageChange = (page: number) => {
     setCurrentPage(page)
@@ -31,6 +35,7 @@ export function PokemonList({
                 pokemon={pokemon}
                 key={index}
                 setRenderFavorites={setRenderFavorites}
+                setErrorMessage={setErrorMessage}
               />
             ))}
           </div>

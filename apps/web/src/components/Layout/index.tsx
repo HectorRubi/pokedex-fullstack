@@ -13,7 +13,7 @@ import { USER } from './../../utils/constants'
 
 export function Layout() {
   const [isUser, setIsUser] = useState(false)
-  const { showError, setShowError, errorMessage, setErrorMessage } = useError()
+  const { errorMessage, setErrorMessage } = useError()
 
   useEffect(() => {
     const user = localStorage.getItem(USER)
@@ -27,6 +27,7 @@ export function Layout() {
           <Navbar />
         </nav>
       </header>
+
       <main className="bg-slate-100 dark:bg-[#111827]">
         <section className="max-w-5xl mx-auto mb-20">
           <img
@@ -36,21 +37,20 @@ export function Layout() {
             alt="logo"
           />
         </section>
+
         <section className="max-w-5xl mx-auto px-2 lg:px-0 min-h-[68vh]">
           {isUser ? (
-            <PokemonLayout />
+            <PokemonLayout setErrorMessage={setErrorMessage} />
           ) : (
-            <User
-              setIsUser={setIsUser}
-              setShowError={setShowError}
-              setErrorMessage={setErrorMessage}
-            />
+            <User setIsUser={setIsUser} setErrorMessage={setErrorMessage} />
           )}
         </section>
+
         <footer className="max-w-5xl mx-auto mt-20 py-8 px-2 lg:px-0">
           <Footer />
         </footer>
-        {showError && <Error message={errorMessage} />}
+
+        {errorMessage !== null && <Error message={errorMessage} />}
       </main>
     </Flowbite>
   )

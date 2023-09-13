@@ -3,7 +3,10 @@ import { getFavorites } from './../api/favorite'
 import { Pokemon } from './../types/pokemon.api'
 import { USER } from './../utils/constants'
 
-export function useFetchFavorites(renderFavorites: symbol) {
+export function useFetchFavorites(
+  renderFavorites: symbol,
+  setErrorMessage: React.Dispatch<React.SetStateAction<string | null>>,
+) {
   const [favorites, setFavorites] = useState<Pokemon[]>([])
   const [showLoader, setShowLoader] = useState(true)
 
@@ -19,13 +22,15 @@ export function useFetchFavorites(renderFavorites: symbol) {
           setFavorites(response)
         })
         .catch(() => {
-          // Show Error
+          setErrorMessage(
+            'Something wrong happen fetching favorites, please try again later.',
+          )
         })
         .finally(() => {
           setShowLoader(false)
         })
     }
-  }, [renderFavorites])
+  }, [renderFavorites, setErrorMessage])
 
   return {
     favorites,
