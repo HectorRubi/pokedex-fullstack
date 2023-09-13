@@ -19,10 +19,13 @@ export function PokemonCard({
   setErrorMessage: React.Dispatch<React.SetStateAction<string | null>>
 }) {
   const [openModal, setOpenModal] = useState<string | undefined>()
+  const [addLoader, setAddLoader] = useState<boolean>(false)
+  const [deleteLoader, setDeleteLoader] = useState<boolean>(false)
 
   const onAddFavorite = (id: number) => {
     const user = localStorage.getItem(USER)
     if (user) {
+      setAddLoader(true)
       addFavorite(user, id)
         .then(() => {
           setRenderFavorites(Symbol())
@@ -33,12 +36,16 @@ export function PokemonCard({
             'Something wrong happen adding favorite, please try again later.',
           )
         })
+        .finally(() => {
+          setAddLoader(false)
+        })
     }
   }
 
   const onDeleteFavorite = (id: number) => {
     const user = localStorage.getItem(USER)
     if (user) {
+      setDeleteLoader(true)
       removeFavorite(user, id)
         .then(() => {
           setRenderFavorites(Symbol())
@@ -48,6 +55,9 @@ export function PokemonCard({
           setErrorMessage(
             'Something wrong happen removing favorite, please try again later.',
           )
+        })
+        .finally(() => {
+          setDeleteLoader(false)
         })
     }
   }
@@ -77,6 +87,8 @@ export function PokemonCard({
           {isFavorite ? (
             <Tooltip content="Delete from Favorites">
               <Button
+                isProcessing={deleteLoader}
+                disabled={deleteLoader}
                 color="failure"
                 onClick={() => onDeleteFavorite(pokemon.id)}
               >
@@ -85,7 +97,12 @@ export function PokemonCard({
             </Tooltip>
           ) : (
             <Tooltip content="Add to Favorites">
-              <Button color="warning" onClick={() => onAddFavorite(pokemon.id)}>
+              <Button
+                isProcessing={addLoader}
+                disabled={addLoader}
+                color="warning"
+                onClick={() => onAddFavorite(pokemon.id)}
+              >
                 <HiStar />
               </Button>
             </Tooltip>
