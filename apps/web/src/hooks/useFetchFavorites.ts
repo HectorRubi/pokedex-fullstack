@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
+import { AxiosError } from 'axios'
 import { getFavorites } from './../api/favorite'
 import { Pokemon } from './../types/pokemon.api'
-import { USER } from './../utils/constants'
+import { UNAUTHORIZED, USER } from './../utils/constants'
 
 export function useFetchFavorites(
   renderFavorites: symbol,
@@ -21,10 +22,15 @@ export function useFetchFavorites(
         .then((response) => {
           setFavorites(response)
         })
-        .catch(() => {
-          setErrorMessage(
-            'Something wrong happen fetching favorites, please try again later.',
-          )
+        .catch((error: AxiosError) => {
+          if (error.response?.status === UNAUTHORIZED) {
+            localStorage.removeItem(USER)
+            location.reload()
+          } else {
+            setErrorMessage(
+              'Something wrong happen fetching favorites, please try again later.',
+            )
+          }
         })
         .finally(() => {
           setShowLoader(false)

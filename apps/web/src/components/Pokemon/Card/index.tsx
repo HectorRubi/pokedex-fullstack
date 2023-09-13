@@ -5,7 +5,7 @@ import { PokemonInfo } from './../Info'
 import { capitalize } from './../../../utils/capitalize'
 import { Pokemon } from './../../../types/pokemon.api'
 import { addFavorite, removeFavorite } from '../../../api/favorite'
-import { USER } from '../../../utils/constants'
+import { UNAUTHORIZED, USER } from '../../../utils/constants'
 
 export function PokemonCard({
   pokemon,
@@ -31,10 +31,14 @@ export function PokemonCard({
           setRenderFavorites(Symbol())
         })
         .catch((error) => {
-          console.log(error)
-          setErrorMessage(
-            'Something wrong happen adding favorite, please try again later.',
-          )
+          if (error.response?.status === UNAUTHORIZED) {
+            localStorage.removeItem(USER)
+            location.reload()
+          } else {
+            setErrorMessage(
+              'Something wrong happen fetching favorites, please try again later.',
+            )
+          }
         })
         .finally(() => {
           setAddLoader(false)
@@ -51,10 +55,14 @@ export function PokemonCard({
           setRenderFavorites(Symbol())
         })
         .catch((error) => {
-          console.log(error)
-          setErrorMessage(
-            'Something wrong happen removing favorite, please try again later.',
-          )
+          if (error.response?.status === UNAUTHORIZED) {
+            localStorage.removeItem(USER)
+            location.reload()
+          } else {
+            setErrorMessage(
+              'Something wrong happen fetching favorites, please try again later.',
+            )
+          }
         })
         .finally(() => {
           setDeleteLoader(false)
