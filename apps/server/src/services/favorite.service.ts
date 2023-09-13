@@ -1,4 +1,4 @@
-import { notFound } from '@hapi/boom'
+import { notFound, unauthorized } from '@hapi/boom'
 import {
   User as UserModel,
   Pokemon as PokemonModel,
@@ -22,19 +22,21 @@ export class FavoriteService {
     })
 
     if (!user) {
-      throw notFound()
+      throw unauthorized()
     }
 
     return user
   }
 
   async add(userId: string, pokemonId: number) {
-    const { user, pokemon } = await this._getPokemonAndUser(userId, pokemonId)
+    const user = await this._getUser(userId)
+    const pokemon = await this._getPokemon(pokemonId)
     await user.addPokemon(pokemon)
   }
 
   async delete(userId: string, pokemonId: number) {
-    const { user, pokemon } = await this._getPokemonAndUser(userId, pokemonId)
+    const user = await this._getUser(userId)
+    const pokemon = await this._getPokemon(pokemonId)
 
     return await UserPokemonModel.destroy({
       where: {
@@ -44,17 +46,19 @@ export class FavoriteService {
     })
   }
 
-  private async _getPokemonAndUser(userId: string, pokemonId: number) {
-    const pokemon = await PokemonModel.findOne({ where: { id: pokemonId } })
+  private async _getUser(userId: string) {
     const user = await UserModel.findOne({ where: { uuid: userId } })
+    if (!user) {
+      throw unauthorized()
+    }
+    return user
+  }
 
-    if (!pokemon || !user) {
+  private async _getPokemon(pokemonId: number) {
+    const pokemon = await PokemonModel.findOne({ where: { id: pokemonId } })
+    if (!pokemon) {
       throw notFound()
     }
-
-    return {
-      user,
-      pokemon,
-    }
+    return pokemon
   }
 }
