@@ -13,7 +13,7 @@ export function PokemonLayout({
   const [renderFavorites, setRenderFavorites] = useState(Symbol())
 
   return (
-    <Tabs.Group aria-label="Default tabs" style="default">
+    <Tabs.Group aria-label="Default tabs" style="underline">
       <Tabs.Item active icon={MdDashboard} title="All">
         <PokemonList
           setRenderFavorites={setRenderFavorites}
