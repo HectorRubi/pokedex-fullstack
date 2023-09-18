@@ -48,6 +48,50 @@ Before you begin, ensure you have the following installed on your system:
 
    Open your browser and navigate to http://localhost:8080 to access the frontend of the application.
 
+## Manual installation
+
+
+1. **Make sure to have installed:**
+   - PostgreSQL:  [Installation Guide](https://www.postgresql.org/download/)
+   - Node JS: [Installation Guide](https://nodejs.org/en)
+
+1. **Create a new Database in PostgreSQL named ```pokemon```.**
+
+1. **Clone this repository to your local machine:**
+
+   ```bash
+   git clone https://github.com/HectorRubi/pokedex-fullstack-tech-challenge.git
+   cd pokedex-fullstack-tech-challenge
+   ```
+
+1. **Create .env files for the backend and frontend based on the provided examples:**
+
+   - For the backend, create a .env file in the `apps/server` directory and set the necessary database configuration variables, this configuration only works inside the container:
+
+     ```plaintext
+     DB_URI='postgres://[YOUR_DB_USER]:[YOUR_DB_PASS]@localhost:[POSTGRES_PORT]/pokemon'
+     POKEAPI='https://pokeapi.co/api/v2'
+     ```
+   - Change YOUR_DB_USER, YOUR_DB_PASS and POSTGRES_PORT by the corresponding of your system (Note: POSTGRES_PORT usually is 5432).
+
+   - For the frontend, create a .env file in the `apps/web` directory and set the backend URL:
+
+     ```plaintext
+     VITE_API_URL='http://localhost:3000/api'
+     ```
+
+1. Execute the next commands as follows:
+   ```bash
+      npm run migration:run --workspace=server
+      npm run build --workspace=server
+      npm run start --workspace=server
+      npm run dev --workspace=web
+   ```
+
+4. **Access the application in your web browser:**
+
+   Open your browser and navigate to http://localhost:5173 to access the frontend of the application.
+
 ## Usage
 
 The Pokedex Application allows you to explore a list of Pokemon and add some to favorites section. Here's a step-by-step guide on how to use the application:
