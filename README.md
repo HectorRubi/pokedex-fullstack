@@ -82,6 +82,7 @@ Before you begin, ensure you have the following installed on your system:
 
 1. Execute the next commands as follows:
    ```bash
+      npm install
       npm run migration:run --workspace=server
       npm run build --workspace=server
       npm run start --workspace=server
