@@ -8,8 +8,8 @@ Welcome to the Pokedex! This repository contains the necessary files and configu
 
 Before you begin, ensure you have the following installed on your system:
 
-- Docker: [Installation Guide](https://docs.docker.com/get-docker/)
-- Docker Compose: [Installation Guide](https://docs.docker.com/compose/install/)
+- Docker 26+: [Installation Guide](https://docs.docker.com/get-docker/)
+- Docker Compose v2: [Installation Guide](https://docs.docker.com/compose/install/)
 - Make: [GNU Official Page](https://www.gnu.org/software/make/)
 
 ## Getting Started
@@ -17,20 +17,20 @@ Before you begin, ensure you have the following installed on your system:
 1. **Clone this repository to your local machine:**
 
    ```bash
-   git clone https://github.com/HectorRubi/pokedex-fullstack-tech-challenge.git
-   cd pokedex-fullstack-tech-challenge
+   git clone https://github.com/HectorRubi/pokedex-fullstack.git
+   cd pokedex-fullstack
    ```
 
-2. **Create .env files for the backend and frontend based on the provided examples:**
+2. **Create .env files:**
 
-   - For the backend, create a .env file in the `apps/server` directory and set the necessary database configuration variables, this configuration only works inside the container:
+   - **Backend**: create a .env file in the `apps/server` directory and set the necessary database configuration variables, this configuration only works inside the container:
 
      ```plaintext
      DB_URI='postgres://admin:admin123@db:5432/pokemon'
      POKEAPI='https://pokeapi.co/api/v2'
      ```
 
-   - For the frontend, create a .env file in the `apps/web` directory and set the backend URL:
+   - **Frontend**: create a .env file in the `apps/web` directory and set the backend URL:
 
      ```plaintext
      VITE_API_URL='http://localhost:3000/api'
@@ -50,12 +50,12 @@ Before you begin, ensure you have the following installed on your system:
 
 ## Manual installation
 
-
 1. **Make sure to have installed:**
-   - PostgreSQL:  [Installation Guide](https://www.postgresql.org/download/)
+
+   - PostgreSQL: [Installation Guide](https://www.postgresql.org/download/)
    - Node JS: [Installation Guide](https://nodejs.org/en)
 
-1. **Create a new Database in PostgreSQL named ```pokemon```.**
+1. **Create a new Database in PostgreSQL named `pokemon`.**
 
 1. **Clone this repository to your local machine:**
 
@@ -72,6 +72,7 @@ Before you begin, ensure you have the following installed on your system:
      DB_URI='postgres://[YOUR_DB_USER]:[YOUR_DB_PASS]@localhost:[POSTGRES_PORT]/pokemon'
      POKEAPI='https://pokeapi.co/api/v2'
      ```
+
    - Change YOUR_DB_USER, YOUR_DB_PASS and POSTGRES_PORT by the corresponding of your system (Note: POSTGRES_PORT usually is 5432).
 
    - For the frontend, create a .env file in the `apps/web` directory and set the backend URL:
@@ -81,6 +82,7 @@ Before you begin, ensure you have the following installed on your system:
      ```
 
 1. Execute the next commands as follows:
+
    ```bash
       npm install
       npm run migration:run --workspace=server
@@ -89,7 +91,7 @@ Before you begin, ensure you have the following installed on your system:
       npm run dev --workspace=web
    ```
 
-4. **Access the application in your web browser:**
+1. **Access the application in your web browser:**
 
    Open your browser and navigate to http://localhost:5173 to access the frontend of the application.
 
@@ -131,6 +133,18 @@ The Pokedex Application allows you to explore a list of Pokemon and add some to 
    USER=admin
    PASSWORD=admin123
    ```
+
+## Troubleshooting
+
+- If you get this error after the execution of `make start` command means you don't have **make** installed.
+
+  ```shell
+  Command 'make' not found, but can be installed with:
+  sudo apt install make        # version 4.3-4.1build1, or
+  sudo apt install make-guile  # version 4.3-4.1build1
+  ```
+
+  To fix this error just follow the instruction, install make and try again.
 
 ## Structure
 
