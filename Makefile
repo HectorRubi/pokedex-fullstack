@@ -5,12 +5,12 @@ start:
 	make init
 
 simple-start:
-	docker-compose up -d
+	docker compose up -d
 
 stop:
-	docker-compose down
+	docker compose down
 	docker image rm pokedex_app
 	docker image rm pokedex_server
 
 init:
-	docker-compose exec server npm run migration:run
+	docker compose exec server npm run migration:run
